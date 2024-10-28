@@ -35,6 +35,8 @@
         alias sudoedit="doas $EDITOR"
         alias ne="/etc/nixos/modules/scripts/ne.sh"
         alias he="nano ~/.config/hypr/hyprland.conf"
+	alias rb="sudo nixos-rebuild switch && git -C /etc/nixos add --all && git -C /etc/nixos commit -m "Update NixOS configuration" && git -C /etc/nixos push origin main"
+
       '';
       syntaxHighlighting.enable = true; # Enable syntax highlighting
       autosuggestions.enable = true; # Enable autosuggestions
