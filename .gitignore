@@ -1,0 +1,8 @@
+# Ignore hardware configuration file
+hardware-configuration.nix
+
+# Ignore sensitive password file in modules
+modules/GaymerPasswd.nix
+
+# Ignore SSH directory with keys
+ssh/

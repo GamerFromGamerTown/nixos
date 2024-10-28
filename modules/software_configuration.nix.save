@@ -1,0 +1,150 @@
+{ config, pkgs, lib, ... }:
+
+{
+  # Program Configuration
+  programs = {
+    # Enable Firefox
+    firefox.enable = true;
+
+    # Enable Hyprland window manager and related programs
+    hyprland = {
+      enable = true;
+      xwayland.enable = true; # Enable XWayland for compatibility with X11 applications
+    };
+    hyprlock.enable = true; # Enable Hyprlock
+
+    # Enable Steam with external testing
+    steam = {
+      enable = true;
+      extest.enable = true;
+    };
+
+    # Zsh Configuration
+    zsh = {
+      enable = true;
+      histSize = 2500; # Set history size
+      shellInit = ''
+        # Custom commands and aliases
+        fastfetch
+        export EDITOR=nano
+        alias ls="ls -Ahs --color=auto"
+        alias ll="ls -lah"
+        alias du="du -h"
+        alias sudo="doas"
+        whomstami='echo thou art $(whoami)'
+        alias sudoedit="doas $EDITOR"
+        alias ne="/etc/nixos/modules/scripts/ne.sh"
+      '';
+      syntaxHighlighting.enable = true; # Enable syntax highlighting
+      autosuggestions.enable = true; # Enable autosuggestions
+      ohMyZsh = {
+        enable = true;
+        plugins = [ "git" ]; # Use git plugin
+        theme = "kolo"; # Set theme to "kolo"
+      };
+    };
+  };
+
+  # Environment Configuration
+  environment = {
+    defaultPackages = lib.mkForce [ ];
+    systemPackages = with pkgs; [
+      amdctl
+      amdgpu_top
+      apparmor-profiles
+      auto-cpufreq
+      btop
+      brave
+      bleachbit
+      bluez
+      bubblewrap
+      busybox
+      cachix
+      cmatrix
+      clamav
+      dash
+      doas
+      eww
+      fastfetch
+      foot
+      fzf
+      git
+      gimp
+      htop
+      gtop
+      gnumake
+      grub2
+      home-manager
+      networkmanager
+      networkmanager-openvpn
+      preload
+      protonvpn-cli
+      protonvpn-gui
+      polkit-kde-agent
+      prismlauncher
+      libglvnd
+      libnotify
+      libva
+      libvdpau-va-gl
+      libvirt
+      logrotate
+      mesa
+      mesa.drivers
+      mullvad-vpn
+      nerdfonts
+      oh-my-zsh
+      openal
+      pamixer
+      pavucontrol
+      pipewire
+      polkit
+      python3
+      qemu
+      sleek-grub-theme
+      steam
+      swaybg
+      timer
+      tldr
+      tor-browser
+      virt-manager
+      waybar
+      wget
+      waypaper
+      vencord
+      vscodium
+      wayland
+      wayland-utils
+      wofi
+      xwayland
+      zsh
+      #v Essential tooling (needed with environment.defaultPackages = lib.mkForce [];)  v
+      bashInteractive
+      coreutils-full
+      curl
+      less
+      mkpasswd
+      nano
+      ncurses
+      netcat
+      su
+      time
+      util-linux
+      which
+      xz
+    ];
+  };
+
+  # Virtualization Configuration
+  virtualisation.libvirtd = {
+    enable = true;
+    extraConfig = ''
+      unix_sock_group = "libvirt"
+      unix_sock_ro_perms = "0777"
+      unix_sock_rw_perms = "0770"
+      auth_unix_ro = "none"
+      auth_unix_rw = "none"
+      log_filters = "3:remote 4:event 3:json 3:jrpc 4:util.json 1:util.libvirt"
+      log_outputs = "1:file:/var/log/libvirt/libvirtd.log"
+    '';
+  };
+}
