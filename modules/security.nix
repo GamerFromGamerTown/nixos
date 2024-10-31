@@ -6,7 +6,10 @@
   environment.variables.LD_PRELOAD = "/nix/store/xas37drcjyxklrkw533abp5a6ld6b59v-graphene-hardened-malloc-2024040900/lib/libhardened_malloc.so";
 
   security = {
-    apparmor.enable = true; # Enable AppArmor for mandatory access control
+    apparmor = {
+      enableCache = true;
+      enable = true; # Enable AppArmor for mandatory access control
+    };
     chromiumSuidSandbox.enable = true; # Enable sandboxing for Chromium
     rtkit.enable = true; # Enable real-time policy and watchdog
     polkit.enable = true; # Enable Polkit for privilege management

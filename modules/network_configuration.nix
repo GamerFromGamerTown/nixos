@@ -9,7 +9,6 @@
     enableIPv6 = true; # Enable IPv6
     stevenblack.enable = true;
     wireguard.enable = true;
-
     # Enable NetworkManager for managing network connections
     networkmanager = {
       enable = true;

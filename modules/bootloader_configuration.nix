@@ -36,7 +36,9 @@
     "amdgpu.ppfeaturemask=0xffffffff" # Unlocks all AMD GPU power management features
     "rcu_nocbs=0-1" # Offloads RCU callbacks from the first two cores
     "video=1920x1080"
-   ];
+    "amdgpu.dpm=1" # Enables dynamic power management
+    "amdgpu.runpm=1"  # Enables runtime power management" 
+  ];
 
 
   # Hostname Configuration

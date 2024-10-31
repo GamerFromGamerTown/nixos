@@ -30,10 +30,11 @@ in
     ./modules/user_configuration.nix
     ./modules/libvirt.nix
     ./modules/fonts.nix
-    ./modules/GaymerPasswd.nix
+    ./modules/secrets/GaymerPasswd.nix
+    ./modules/secrets/vpnconfig.nix
+    ./modules/aa-profiles/aa-profiles.nix
     # ./modules/systemd_hardening.nix
     ./modules/system_users.nix
-    # ./modules/scripts_configuration.nix
     "${home-manager}/nixos" # Correct reference to home-manager fetched tarball
     <catppuccin/modules/nixos>
   ];

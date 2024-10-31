@@ -31,7 +31,7 @@
         alias ll="ls -lah"
         alias du="du -h"
         alias sudo="doas"
-        whomstami='echo thou art $(whoami)'
+        whomstami="echo thou art $(whoami)"
         alias sudoedit="doas $EDITOR"
         alias ne="/etc/nixos/modules/scripts/ne.sh"
         alias he="nano ~/.config/hypr/hyprland.conf"
@@ -64,7 +64,9 @@
       fzf
       graphene-hardened-malloc
       grub2
+      lact
       logrotate
+      lm_sensors
       oh-my-zsh
       timer
       wget
@@ -79,8 +81,6 @@
       networkmanager-openvpn
       polkit
       polkit_gnome
-      protonvpn-cli
-      protonvpn-gui
       qemu
       virt-manager
 

@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }:
 
 {
+
   # Services Configuration
   services = {
     # Enable the X11 windowing system
@@ -45,9 +46,6 @@
     };
     thermald.enable = true; # Enable thermal management
 
-    # VPN Service
-    mullvad-vpn.enable = true;
-
     # Preload Service
     preload.enable = true;
 
@@ -61,6 +59,8 @@
 
   # Systemd Configuration
   systemd = {
+    packages = with pkgs; [ lact ];
+    services.lactd.wantedBy = ["multi-user.target"];
     sockets = {
       libvirtd.enable = true;
       libvirtd_ro.enable = true;

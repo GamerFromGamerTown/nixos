@@ -1,0 +1,16 @@
+# Last Modified: Wed Oct 30 20:02:22 2024
+abi <abi/3.0>,
+
+include <tunables/global>
+
+/nix/store/0s9nj8xfccb4rixjcx9rniw83i85s0lr-kate-24.02.2/bin/kate {
+  include <abstractions/base>
+
+  /nix/store/0s9nj8xfccb4rixjcx9rniw83i85s0lr-kate-24.02.2/bin/kate mr,
+  /nix/store/c10zhkbp6jmyh0xc5kd123ga8yy2p4hk-glibc-2.39-52/lib/ld-linux-x86-64.so.* mr,
+  /nix/store/c10zhkbp6jmyh0xc5kd123ga8yy2p4hk-glibc-2.39-52/lib/lib*so* mr,
+  /nix/store/swcl0ynnia5c57i6qfdcrqa72j7877mg-gcc-13.2.0-lib/lib/lib*so* mr,
+  /nix/store/xas37drcjyxklrkw533abp5a6ld6b59v-graphene-hardened-malloc-2024040900/lib/lib*so* mr,
+  /nix/store/yfd49ay99aa1a0jg80jsvnxbyl61fsh6-gcc-13.2.0-libgcc/lib/lib*so* mr,
+
+}
