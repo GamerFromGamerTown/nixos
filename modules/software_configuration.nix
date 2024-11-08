@@ -52,6 +52,7 @@
   environment = {
     defaultPackages = lib.mkForce [ ];
     systemPackages = with pkgs; [
+
       # System Utilities and Tools
       amdctl
       amdgpu_top
@@ -79,8 +80,8 @@
       libvirt
       networkmanager
       networkmanager-openvpn
-      polkit
-      polkit_gnome
+      #polkit
+      #polkit_gnome
       qemu
       virt-manager
 
@@ -89,10 +90,12 @@
       git
       home-manager
       python3
+      qbittorrent
 
 # Multimedia and Graphics
       gimp
       libglvnd
+      libreoffice-fresh
       libnotify
       libva
       libvdpau-va-gl
@@ -126,7 +129,6 @@
 # Monitoring and Information
       btop
       cmatrix
-      gtop
       htop
 
 # Essential tooling (needed with environment.defaultPackages = lib.mkForce [];) 

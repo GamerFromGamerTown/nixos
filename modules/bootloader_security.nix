@@ -28,14 +28,11 @@
       "f2fs"
       "hid_generic"
       "iwlwifi"
-      "jfs"
       "kvm"
       "kvm-amd"
       "ntfs"
-      "squashfs"
       "usbhid"
       "vfat"
-      "xfs"
       "xhci_pci"
     ];
     supportedFilesystems = [ "ntfs" ];
@@ -62,7 +59,9 @@
       "spec_store_bypass_disable=on"
       # "l1tf=full,force" "tsx=off" "tsx_async_abort=full,nosmt" # Optional settings
       "kvm.nx_huge_pages=force" # May increase memory usage, especially with hypervisors
-      # Disable hyperthreading for security with "nosmt=force", but impacts performance
+      "amdgpu.aspm=1" 
+      "pcie_aspm=force"
+    
     ];
 
     # Systemd Boot Hardening

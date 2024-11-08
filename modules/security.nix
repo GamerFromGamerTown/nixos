@@ -6,13 +6,18 @@
   environment.variables.LD_PRELOAD = "/nix/store/xas37drcjyxklrkw533abp5a6ld6b59v-graphene-hardened-malloc-2024040900/lib/libhardened_malloc.so";
 
   security = {
+    pki = {
+      rejectSelfSignedCertificates = true;
+      enforceCertificatePolicy = true;
+    };
+
     apparmor = {
       enableCache = true;
       enable = true; # Enable AppArmor for mandatory access control
     };
+
     chromiumSuidSandbox.enable = true; # Enable sandboxing for Chromium
     rtkit.enable = true; # Enable real-time policy and watchdog
-    polkit.enable = true; # Enable Polkit for privilege management
 
     protectKernelImage = true; # Protect the kernel image from being modified
     lockKernelModules = false; # Set to true to lock kernel modules (requires specifying all modules)
@@ -65,43 +70,48 @@
     dbus.apparmor = "enabled"; # Enable AppArmor for D-Bus
   };
 
-  # Virtualization Configuration
-  virtualisation.libvirtd.enable = true; # Enable libvirt for virtualization management
+  virtualisation.libvirtd.enable = true;
 
   networking.firewall = {
-    enable = true; # Enable the firewall
-    filterForward = false; # Block forwarding packets unless explicitly allowed
-    rejectPackets = true; # Reject all incoming packets by default
-    logRefusedPackets = true; # Log refused packets for visibility
-    allowPing = false; # Deny ICMP/ping requests by default (can be set to true if you want to allow ping)
+  enable = true;
+  filterForward = false;
+  rejectPackets = true;
+  logRefusedPackets = true;
+  allowPing = false;
+  
+  allowedTCPPorts = [
+    22      # SSH
+    80      # HTTP
+    443     # HTTPS
+    25565   # Minecraft
+    3478    # Easy Anti-Cheat UDP ports (STUN/TURN)
+    3479    # Easy Anti-Cheat UDP ports (STUN/TURN)
+    3658    # Easy Anti-Cheat voice and game traffic
+  ];
+  
+  allowedUDPPorts = [
+    1194    # OpenVPN
+    51820   # WireGuard
+    80      # Easy Anti-Cheat HTTP
+    123     # NTP for EAC
+    3478    # Easy Anti-Cheat UDP ports (STUN/TURN)
+    3479    # Easy Anti-Cheat UDP ports (STUN/TURN)
+    3658    # Easy Anti-Cheat voice and game traffic
+    5060    # Easy Anti-Cheat voice traffic
+    5062    # Easy Anti-Cheat voice traffic
+  ];
+  
+  allowedTCPPortRanges = [
+    { from = 27015; to = 27030; } # Steam gaming ports
+    { from = 27036; to = 27037; } # Steam client
+  ];
 
-    # Define trusted interfaces if there are any (e.g., VPN interfaces)
-    trustedInterfaces = [ ];
-
-    # Defining allowed TCP and UDP ports for specific services and applications
-    allowedTCPPorts = [
-      22      # SSH - allow remote administration if needed (consider restricting to specific IPs)
-      80      # HTTP - for web browsing
-      443     # HTTPS - for secure web browsing
-      25565   # Minecraft server default port
-    ];
-
-    allowedUDPPorts = [
-      1194    # OpenVPN for VPN connectivity
-      51820   # WireGuard for VPN connectivity
-    ];
-
-    # Specific allowed port ranges if necessary (e.g., for virtual machines or Steam)
-    allowedTCPPortRanges = [
-      { from = 27015; to = 27030; } # Steam gaming ports
-      { from = 27036; to = 27037; } # Steam client
-    ];
-
-    allowedUDPPortRanges = [
-      { from = 4380; to = 4380; }    # Steam P2P
-      { from = 27000; to = 27031; }  # Steam gaming and voice
-    ];
-
+  allowedUDPPortRanges = [
+    { from = 4380; to = 4380; }    # Steam P2P
+    { from = 27000; to = 27031; }  # Steam gaming and voice
+    { from = 6000; to = 6060; }    # VNC/Easy Anti-Cheat traffic
+  ];
+  
     # Define rules for specific interfaces if needed (e.g., VPN or LAN)
     interfaces = {
       "eth0" = {

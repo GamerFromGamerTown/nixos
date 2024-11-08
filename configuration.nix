@@ -1,9 +1,11 @@
 { config, pkgs, ... }:
 
+# Simplfy to only imports.
+
 let
   # Define local variables using let
   home-manager = builtins.fetchTarball {
-    url = "https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz";
+    url = "https://github.com/nix-community/home-manager/archive/master.tar.gz";
     sha256 = "sha256:00wp0s9b5nm5rsbwpc1wzfrkyxxmqjwsc1kcibjdbfkh69arcpsn";
   };
 
@@ -41,5 +43,5 @@ in
 
   time.timeZone = "US/Alaska";
   nixpkgs.config.allowUnfree = true;
-  system.stateVersion = "24.05"; # Use a stable state version
+  system.stateVersion = "unstable";
 }

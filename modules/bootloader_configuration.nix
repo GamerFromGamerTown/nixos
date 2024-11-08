@@ -38,6 +38,8 @@
     "video=1920x1080"
     "amdgpu.dpm=1" # Enables dynamic power management
     "amdgpu.runpm=1"  # Enables runtime power management" 
+    "acpi_cpufreq"
+    "hp-wmi"
   ];
 
 

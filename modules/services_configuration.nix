@@ -6,11 +6,11 @@
   services = {
     # Enable the X11 windowing system
     xserver = {
-      enable = true;
+      enable = false;
       videoDrivers = [ "amdgpu" ];
       xkb = {
         layout = "us"; # Configure keyboard layout
-        variant = ""; # Optional: Specify keyboard variant
+        variant = "";
       };
     };
 
@@ -35,22 +35,7 @@
       pulse.enable = true;
     };
 
-    # Power management services
-    auto-cpufreq = {
-      enable = true;
-      settings.battery = {
-        scaling_max_freq = 1600000; # Max frequency for battery mode (1.6GHz)
-        turbo = "auto";
-        start_threshold = 70; # Start scaling when battery is below 70%
-      };
-    };
-    thermald.enable = true; # Enable thermal management
-
-    # Preload Service
-    preload.enable = true;
-
     # Security-related services
-    #dbus.packages = [ pkgs.kdePackages.polkit-kde-agent-1 ];
     dbus.enable = true;
 
     # Disable power profiles daemon
@@ -67,12 +52,13 @@
       libvirtd_admin.enable = true;
     };
   };
-  environment.etc."xdg/autostart/polkit-gnome-authentication-agent-1.desktop".text = ''
-    [Desktop Entry]
-    Type=Application
-    Exec=${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
-    Name=Polkit GNOME Authentication Agent
-  '';
+  
+  #environment.etc."xdg/autostart/polkit-gnome-authentication-agent-1.desktop".text = ''
+  #  [Desktop Entry]
+  #  Type=Application
+  #  Exec=${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
+  #  Name=Polkit GNOME Authentication Agent
+  #'';
 
   # Virtualisation Configuration
   virtualisation = {
@@ -127,8 +113,8 @@
     ${pkgs.pcre}/lib/libpcre.so.1
   '';
   environment.shellInit = ''
-    umask 0077                      # Set restrictive file permissions by default
-  '';
+    umask 0077                      # Set restrictive file permissions by default 
+ '';
 
 
   # Theme Configuration
