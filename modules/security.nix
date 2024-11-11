@@ -6,11 +6,6 @@
   environment.variables.LD_PRELOAD = "/nix/store/xas37drcjyxklrkw533abp5a6ld6b59v-graphene-hardened-malloc-2024040900/lib/libhardened_malloc.so";
 
   security = {
-    pki = {
-      rejectSelfSignedCertificates = true;
-      enforceCertificatePolicy = true;
-    };
-
     apparmor = {
       enableCache = true;
       enable = true; # Enable AppArmor for mandatory access control
@@ -34,7 +29,7 @@
     auditd = {
       enable = true;
     };
-  };
+};
 
   # Hardware Configuration
   hardware.cpu.amd.updateMicrocode = true; # Update AMD CPU microcode for security fixes

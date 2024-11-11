@@ -36,7 +36,7 @@
         alias ne="/etc/nixos/modules/scripts/ne.sh"
         alias he="nano ~/.config/hypr/hyprland.conf"
 	alias rb="sudo nixos-rebuild switch && git -C /etc/nixos add --all && git -C /etc/nixos commit -m "Update NixOS configuration" && git -C /etc/nixos push origin main"
-
+	alias np="eval "$(ssh-agent -s)" && git add . && ssh-add ~/.ssh/github_nixos && git commit -m "Update configuration" && git push origin main"
       '';
       syntaxHighlighting.enable = true; # Enable syntax highlighting
       autosuggestions.enable = true; # Enable autosuggestions
@@ -90,7 +90,7 @@
       git
       home-manager
       python3
-      qbittorrent
+      #qbittorrent
 
 # Multimedia and Graphics
       gimp
@@ -105,6 +105,7 @@
       openal
       pavucontrol
       pipewire
+      webcamoid
 
 # Wayland and Compositing
       eww
