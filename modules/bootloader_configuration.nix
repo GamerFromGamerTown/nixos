@@ -47,21 +47,21 @@
   networking.hostName = "nixywixy"; # Set the hostname for the system
   
 
-  fileSystems."/home/gaymer/.games" = {
-    device = "/dev/sda2";
-    fsType = "ext4";
-    options = [ "noatime" "discard" "defaults" ];
-  };
+  #fileSystems."/home/gaymer/.games" = {
+  #  device = "/dev/sda2";
+  #  fsType = "ext4";
+  #  options = [ "noatime" "discard" "defaults" ];
+  #};
 
   # Define a systemd service to change ownership after mounting
-  systemd.services.chownGamesDirectory = {
-    description = "Chown /home/gaymer/.games to gaymer after mounting";
-    after = [ "home-gaymer-.games.mount" ];
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig.ExecStart = [ "${pkgs.coreutils}/bin/chown -R gaymer:gaymer /home/gaymer/.games" ];
-    serviceConfig.Type = "oneshot";
-    serviceConfig.RemainAfterExit = true;
-  };
+  #systemd.services.chownGamesDirectory = {
+  #  description = "Chown /home/gaymer/.games to gaymer after mounting";
+  #  after = [ "home-gaymer-.games.mount" ];
+  #  wantedBy = [ "multi-user.target" ];
+  #  serviceConfig.ExecStart = [ "${pkgs.coreutils}/bin/chown -R gaymer:gaymer /home/gaymer/.games" ];
+  #  serviceConfig.Type = "oneshot";
+  #  serviceConfig.RemainAfterExit = true;
+  #};
 
 }
 

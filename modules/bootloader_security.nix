@@ -36,8 +36,8 @@
       "xhci_pci"
     ];
     supportedFilesystems = [ "ntfs" ];
-    # kernelPackages = pkgs.linuxPackages_hardened; # Bricks boot
-    # extraModulePackages = [ pkgs.linuxKernel.packages.linux_6_6.lkrg ]; # Broken Package
+    #kernelPackages = pkgs.linuxKernel.packages.linux_hardened; # Bricks boot
+    #extraModulePackages = [ pkgs.linuxKernel.packages.linux_6_6.lkrg ]; # Broken Package
     
     # Kernel Parameters
     kernelParams = [
@@ -63,9 +63,6 @@
       "pcie_aspm=force"
     
     ];
-
-    # Systemd Boot Hardening
-    # Uncomment these options if needed for systemd-boot hardening
   };
 
   # File Systems Configuration

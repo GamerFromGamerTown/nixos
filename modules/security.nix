@@ -3,7 +3,10 @@
 {
   # Security Configuration
 
-  environment.variables.LD_PRELOAD = "/nix/store/xas37drcjyxklrkw533abp5a6ld6b59v-graphene-hardened-malloc-2024040900/lib/libhardened_malloc.so";
+  environment = { 
+    variables.LD_PRELOAD = "/nix/store/xas37drcjyxklrkw533abp5a6ld6b59v-graphene-hardened-malloc-2024040900/lib/libhardened_malloc.so";
+    memoryAllocator.provider = "graphene-hardened";
+};
 
   security = {
     apparmor = {
@@ -18,7 +21,8 @@
     lockKernelModules = false; # Set to true to lock kernel modules (requires specifying all modules)
     allowUserNamespaces = true; # Allow user namespaces for unprivileged containers
     forcePageTableIsolation = true; # Mitigate Spectre variant 2 vulnerabilities
-
+    polkit.enable = true;
+    
     sudo.enable = false; # Disable sudo
     doas.enable = true; # Use doas instead of sudo
     doas.extraRules = [{
@@ -42,7 +46,22 @@
   settings.trusted-users = [ "root" "@wheel" ];
 };
   # Systemd Configuration
-  systemd.coredump.enable = false; # Disable coredump handling
+  systemd = {
+    coredump.enable = false; # Disable coredump handling
+    user.services.polkit-gnome-authentication-agent-1 = {
+    description = "polkit-gnome-authentication-agent-1";
+    wantedBy = [ "graphical-session.target" ];
+    wants = [ "graphical-session.target" ];
+    after = [ "graphical-session.target" ];
+    serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
+  };
+  };
   environment.shellInit = ''
     umask 0077                        # Restrict default file permissions to rwx------
   '';

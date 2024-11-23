@@ -6,7 +6,7 @@ let
   # Define local variables using let
   home-manager = builtins.fetchTarball {
     url = "https://github.com/nix-community/home-manager/archive/master.tar.gz";
-    sha256 = "sha256:1jxrzlgc0xzad5hrjixab4brhir1hyf6cvq0zhgb7z9x06kaydin";
+    sha256 = "sha256:1f6zp9dqm06c1r851y30d7k23j89d0yfcp92imwibdqxj1ps6jg5";
   };
 
   nix = {
