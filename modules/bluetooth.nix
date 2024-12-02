@@ -32,7 +32,7 @@
     wantedBy = [ "timers.target" ];
     timerConfig = {
       OnCalendar = "*/20:00"; # Every 20 minutes
-      Persistent = true;      # Ensure the timer runs even if the system was off
+      Persistent = true; # Ensure the timer runs even if the system was off
     };
   };
 

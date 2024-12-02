@@ -1,13 +1,13 @@
-{ config, pkgs, lib, ...}:
-
-{
 { config, pkgs, lib, ... }:
 
 {
+  { config, pkgs, lib, ... }:
+
+  {
   nixpkgs.config = {
     # Override stdenv to use Musl
     stdenv = pkgs.stdenvAdapters.overrideCC (pkgs.gcc.override { libc = pkgs.musl; });
-    
+
     # Set Musl as the libc
     libc = pkgs.musl;
   };

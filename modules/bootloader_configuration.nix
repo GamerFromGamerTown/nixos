@@ -13,7 +13,7 @@
       splashImage = lib.mkForce "/boot/splash-images/nixos-splash.png"; # Force setting splash image
       theme = lib.mkDefault "${pkgs.sleek-grub-theme}/share/grub/themes/sleek"; # Path to the theme directory
       useOSProber = true;
-#     extraFiles = "" # Try to use this to copy stuff like password files or fonts when you have time.      
+      #     extraFiles = "" # Try to use this to copy stuff like password files or fonts when you have time.      
     };
 
     efi.canTouchEfiVariables = true; # Allow modifying UEFI variables
@@ -37,7 +37,7 @@
     "rcu_nocbs=0-1" # Offloads RCU callbacks from the first two cores
     "video=1920x1080"
     "amdgpu.dpm=1" # Enables dynamic power management
-    "amdgpu.runpm=1"  # Enables runtime power management" 
+    "amdgpu.runpm=1" # Enables runtime power management" 
     "acpi_cpufreq"
     "hp-wmi"
   ];
@@ -45,7 +45,7 @@
 
   # Hostname Configuration
   networking.hostName = "nixywixy"; # Set the hostname for the system
-  
+
 
   #fileSystems."/home/gaymer/.games" = {
   #  device = "/dev/sda2";

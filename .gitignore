@@ -2,7 +2,7 @@
 hardware-configuration.nix
 
 # Ignore SSH directory with keys
-ssh/
+ssh /
 
 # Ignore Secrets
 modules/secrets/

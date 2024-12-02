@@ -45,14 +45,14 @@
   # Systemd Configuration
   systemd = {
     packages = with pkgs; [ lact ];
-    services.lactd.wantedBy = ["multi-user.target"];
+    services.lactd.wantedBy = [ "multi-user.target" ];
     sockets = {
       libvirtd.enable = true;
       libvirtd_ro.enable = true;
       libvirtd_admin.enable = true;
     };
   };
-  
+
   #environment.etc."xdg/autostart/polkit-gnome-authentication-agent-1.desktop".text = ''
   #  [Desktop Entry]
   #  Type=Application
@@ -114,7 +114,7 @@
   '';
   environment.shellInit = ''
     umask 0077                      # Set restrictive file permissions by default 
- '';
+  '';
 
 
   # Theme Configuration
@@ -125,14 +125,14 @@
 
   # Programs Configuration
   programs = {
-    virt-manager.enable = true; 
-    dconf.enable = true; 
-      git = {
+    virt-manager.enable = true;
+    dconf.enable = true;
+    git = {
       enable = true;
       config = {
         user = {
-          name = "Your Name";  # Replace with your GitHub display name
-          email = "100511215+GamerFromGamerTown@users.noreply.github.com";  # Replace with your GitHub noreply email
+          name = "Your Name"; # Replace with your GitHub display name
+          email = "100511215+GamerFromGamerTown@users.noreply.github.com"; # Replace with your GitHub noreply email
         };
       };
     };

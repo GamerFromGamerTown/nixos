@@ -20,188 +20,185 @@
     };
 
     #foot = { 
-      #theme = "catppuccin-mocha";
-     # enableFishIntegration = false;
-      #enable = true;
-  #};
+    #theme = "catppuccin-mocha";
+    # enableFishIntegration = false;
+    #enable = true;
+    #};
 
     # Zsh Configuration
-zsh = {
-  enable = true;
-  histSize = 2500; # Set history size
-  shellInit = ''
-    # History Settings
-    export HISTFILE=~/.zsh_history
-    export HISTSIZE=2500
-    export SAVEHIST=2500
+    zsh = {
+      enable = true;
+      ohMyZsh.enable = false;
+      histSize = 2500; # Set history size
+      autosuggestions.enable = true;
+      setOptions = [ "AUTO_CD" "CHASE_LINKS" "AUTO_LIST" "PATH_DIRS" ];
+      shellAliases = {
+        ls = "ls -Ahs --color=auto";
+        ll = "ls -lah";
+        du = "du -h";
+        sudo = "doas";
+        whomstami = "echo thou art $(whoami)";
+        sudoedit = "doas $EDITOR";
+        ne = "/etc/nixos/modules/scripts/ne.sh";
+        he = "/etc/nixos/modules/scripts/he.sh";
+        rb = "sudo nixos-rebuild switch && git -C /etc/nixos add --all && git -C /etc/nixos commit -m 'Update NixOS configuration' && git -C /etc/nixos push origin main";
+        np = "eval \$(ssh-agent -s) && git add . && ssh-add ~/.ssh/github_nixos && git commit -m 'Update configuration' && git push origin main";
+      };
+      syntaxHighlighting = {
+        enable = true;
+        #patterns = { "rm -rf " = "fg=white,bold,bg=red";};      
+      };
 
-    # Environment
-    export EDITOR=nano
+      shellInit = ''
+        # History Settings
+        export HISTFILE=~/.zsh_history
+        export SAVEHIST=2500
 
-    # Aliases
-    alias ls="ls -Ahs --color=auto"
-    alias ll="ls -lah"
-    alias du="du -h"
-    alias sudo="doas"
-    alias whomstami="echo thou art $(whoami)"
-    alias sudoedit="doas $EDITOR"
-    alias ne="/etc/nixos/modules/scripts/ne.sh"
-    alias he="nano ~/.config/hypr/hyprland.conf"
-    alias rb="sudo nixos-rebuild switch && git -C /etc/nixos add --all && git -C /etc/nixos commit -m 'Update NixOS configuration' && git -C /etc/nixos push origin main"
-    alias np="eval \$(ssh-agent -s) && git add . && ssh-add ~/.ssh/github_nixos && git commit -m 'Update configuration' && git push origin main"
+        # Prompt Configuration
+        autoload -Uz colors && colors
+        PROMPT='%{$fg[magenta]%}~%{$reset_color%} %# '
 
-    # Prompt Configuration
-    autoload -Uz colors && colors
-    PROMPT='%{$fg[magenta]%}~%{$reset_color%} %# '
+        # Fastfetch (optional)
+        fastfetch 
+      '';
 
-    # Fastfetch (optional)
-    fastfetch
-
-    # Syntax Highlighting
-    if [ -d ~/.zsh/zsh-syntax-highlighting ]; then
-      source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-    fi
-
-    # Autosuggestions
-    if [ -d ~/.zsh/zsh-autosuggestions ]; then
-      source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-    fi
-
-    # Completion System
-    autoload -Uz compinit
-    compinit -C
-  '';
-
-  # Automatically install zsh-syntax-highlighting and zsh-autosuggestions
-#  package = pkgs.zsh;
-#  additionalPackages = [
-#    pkgs.zsh-syntax-highlighting
-#    pkgs.zsh-autosuggestions
-#    ];
+      # Automatically install zsh-syntax-highlighting and zsh-autosuggestions
+      #  package = pkgs.zsh;
+      #  additionalPackages = [
+      #    pkgs.zsh-syntax-highlighting
+      #    pkgs.zsh-autosuggestions
+      #    ];
+    };
   };
-};
-# Environment Configuration
-environment = {
-  defaultPackages = lib.mkForce [ ];
-  systemPackages = with pkgs; [
-    # System Utilities and Tools
-    amdctl
-    amdgpu_top
-    auto-cpufreq
-    bubblewrap
-    busybox
-    cura
-    doas
-    fastfetch
-    fzf
-    graphene-hardened-malloc
-    glibcLocales
-    grub2
-    lact
-    logrotate
-    lm_sensors
-    musl
-    oh-my-zsh
-    timer
-    wget
-    zsh
 
-    # System Services and Daemons
-    apparmor-profiles
-    bluez
-    clamav
-    libvirt
-    networkmanager
-    networkmanager-openvpn
-    polkit
-    polkit_gnome
-    qemu
-    virt-manager
+  # Environment Configuration
+  environment = {
+    defaultPackages = lib.mkForce [ ];
+    systemPackages = with pkgs; [
+      # System Utilities and Tools
+      amdctl
+      amdgpu_top
+      auto-cpufreq
+      bubblewrap
+      brightnessctl
+      busybox
+      cura
+      doas
+      fastfetch
+      fzf
+      graphene-hardened-malloc
+      glibcLocales
+      grub2
+      lact
+      logrotate
+      lm_sensors
+      mako
+      musl
+      oh-my-zsh
+      redshift
+      timer
+      wget
+      zsh
 
-    # Development Tools
-    brave
-    git
-    home-manager
-    python3
-    #qbittorrent
+      # System Services and Daemons
+      apparmor-profiles
+      bluez
+      clamav
+      libvirt
+      networkmanager
+      networkmanager-openvpn
+      polkit
+      polkit_gnome
+      qemu
+      virt-manager
 
-    # Multimedia and Graphics
-    gimp
-    libglvnd
-    libreoffice-fresh
-    libnotify
-    libva
-    libvdpau-va-gl
-    mesa
-    mesa.drivers
-    mpv
-    openal
-    pavucontrol
-    pipewire
-    webcamoid
+      # Development Tools
+      brave
+      git
+      #home-manager
+      python3
+      #qbittorrent
 
-    # Wayland and Compositing
-    eww
-    foot
-    swaybg
-    vesktop
-    waybar
-    wayland
-    wayland-utils
-    waypaper
-    wofi
-    xwayland
+      # Multimedia and Graphics
+      gimp
+      krita
+      libglvnd
+      libreoffice-still
+      libnotify
+      libva
+      libvdpau-va-gl
+      mesa
+      mesa.drivers
+      mpv
+      obs-studio
+      openal
+      pavucontrol
+      pipewire
+      webcamoid
 
-    # Text Editors and IDEs
-    vscodium
+      # Wayland and Compositing
+      eww
+      foot
+      swaybg
+      vesktop
+      waybar
+      wayland
+      wayland-utils
+      waypaper
+      wofi
+      xwayland
 
-    # Gaming and Launchers
-    prismlauncher
-    steam
-    the-powder-toy
-    tor-browser
+      # Text Editors and IDEs
+      vscodium
 
-    # Monitoring and Information
-    btop
-    cmatrix
-    htop
+      # Gaming and Launchers
+      prismlauncher
+      steam
+      the-powder-toy
+      tor-browser
 
-    # Essential tooling (needed with environment.defaultPackages = lib.mkForce [])
-    bashInteractive
-    coreutils-full
-    curl
-    less
-    mkpasswd
-    nano
-    ncurses
-    netcat
-    su
-    time
-    util-linux
-    which
-    xz
+      # Monitoring and Information
+      btop
+      cmatrix
+      htop
 
-    # Fonts
-    eb-garamond
-    fira-code
-    iosevka-bin
-    jetbrains-mono
-    lato
-    nerdfonts
-    noto-fonts-emoji
-    overpass
-    ubuntu_font_family
+      # Essential tooling (needed with environment.defaultPackages = lib.mkForce [])
+      bashInteractive
+      coreutils-full
+      curl
+      less
+      mkpasswd
+      nano
+      ncurses
+      netcat
+      su
+      time
+      util-linux
+      which
+      xz
+
+      # Fonts
+      eb-garamond
+      fira-code
+      iosevka-bin
+      jetbrains-mono
+      lato
+      nerdfonts
+      noto-fonts-emoji
+      overpass
+      ubuntu_font_family
   ] ++ (with pkgs.kdePackages; [
-    # KDE and Polkit Agent
     polkit-kde-agent-1
+  ]) ++ (with pkgs.xfce; [
+    thunar
   ]);
-};
+  };
 
-# Exclude specific Plasma 6 packages
-environment.plasma6.excludePackages = with pkgs.kdePackages; [
-  plasma-browser-integration
-  oxygen
-];
+  # Exclude specific Plasma 6 packages
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
+    plasma-browser-integration
+    oxygen
+  ];
 
   # Virtualization Configuration
   virtualisation.libvirtd = {
@@ -216,4 +213,7 @@ environment.plasma6.excludePackages = with pkgs.kdePackages; [
       log_outputs = "1:file:/var/log/libvirt/libvirtd.log"
     '';
   };
+
+  environment.variables = { EDITOR = "nano"; };
+
 }

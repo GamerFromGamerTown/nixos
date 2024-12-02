@@ -1,17 +1,17 @@
 { config, pkgs, ... }:
 {
 
-# TODO
-# 1) Make boot readonly [easy]
-# 2) Try to use linux-hardened if it boots [easy]
-# 3) Better AuditD rules [medium]
-# 4) Block known-malicious IPs via the firewall. [easy i'd assume]
-# 5) Actually use bubblewrap. [hard]
-# 6) *Maybe* set security.seccomp.enable = true, figure out what it does [easy]
-# 7) Try the LKRG [Linux Kernel Runtime Guard] [easy once package works]
-# 8) Try to do full disc encryption via the TPM, so in conjunction with classical it will be (functionally) impossible to modify /boot. [hard]
-# 9) Apparmor [very hard]
-# 10) Why is net.ipv4.conf.all.forwarding on despite it being shut off?
+  # TODO
+  # 1) Make boot readonly [easy]
+  # 2) Try to use linux-hardened if it boots [easy]
+  # 3) Better AuditD rules [medium]
+  # 4) Block known-malicious IPs via the firewall. [easy i'd assume]
+  # 5) Actually use bubblewrap. [hard]
+  # 6) *Maybe* set security.seccomp.enable = true, figure out what it does [easy]
+  # 7) Try the LKRG [Linux Kernel Runtime Guard] [easy once package works]
+  # 8) Try to do full disc encryption via the TPM, so in conjunction with classical it will be (functionally) impossible to modify /boot. [hard]
+  # 9) Apparmor [very hard]
+  # 10) Why is net.ipv4.conf.all.forwarding on despite it being shut off?
 
   boot = {
     # Kernel Modules and Filesystems
@@ -38,7 +38,7 @@
     supportedFilesystems = [ "ntfs" ];
     #kernelPackages = pkgs.linuxKernel.packages.linux_hardened; # Bricks boot
     #extraModulePackages = [ pkgs.linuxKernel.packages.linux_6_6.lkrg ]; # Broken Package
-    
+
     # Kernel Parameters
     kernelParams = [
       "slab_nomerge"
@@ -59,9 +59,9 @@
       "spec_store_bypass_disable=on"
       # "l1tf=full,force" "tsx=off" "tsx_async_abort=full,nosmt" # Optional settings
       "kvm.nx_huge_pages=force" # May increase memory usage, especially with hypervisors
-      "amdgpu.aspm=1" 
+      "amdgpu.aspm=1"
       "pcie_aspm=force"
-    
+
     ];
   };
 
@@ -112,7 +112,7 @@
   # Sysctl Configuration
   boot.kernel.sysctl = {
     # Network Settings
-    "net.ipv4.icmp_ratelimit" = "500";  # Control ICMP rate limit
+    "net.ipv4.icmp_ratelimit" = "500"; # Control ICMP rate limit
     "net.ipv4.tcp_timestamps" = "0";
     "net.core.netdev_max_backlog" = "250000";
     "net.ipv4.tcp_congestion_control" = "bbr";
