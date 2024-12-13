@@ -80,7 +80,7 @@
       '';
     };
     journald.forwardToSyslog = true; # Forward journal logs to syslog
-    openssh.enable = true; # Enable OpenSSH server for remote access
+    openssh.enable = false; # Disable OpenSSH server for remote access
     dbus.apparmor = "enabled"; # Enable AppArmor for D-Bus
   };
 
@@ -94,7 +94,7 @@
     allowPing = false;
 
     allowedTCPPorts = [
-      22 # SSH
+      #22 # SSH
       80 # HTTP
       443 # HTTPS
       25565 # Minecraft

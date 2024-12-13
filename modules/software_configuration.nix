@@ -42,7 +42,7 @@
         ne = "/etc/nixos/modules/scripts/ne.sh";
         he = "/etc/nixos/modules/scripts/he.sh";
         rb = "sudo nixos-rebuild switch && git -C /etc/nixos add --all && git -C /etc/nixos commit -m 'Update NixOS configuration' && git -C /etc/nixos push origin main";
-        np = "eval \$(ssh-agent -s) && git add . && ssh-add ~/.ssh/github_nixos && git commit -m 'Update configuration' && git push origin main";
+        np = "eval $(ssh-agent -s) && git -C /etc/nixos add -u && ssh-add ~/.ssh/github_nixos && git -C /etc/nixos commit -m \"Update configuration\" && git -C /etc/nixos push origin main";
       };
       syntaxHighlighting = {
         enable = true;
@@ -85,6 +85,7 @@
       cura
       doas
       fastfetch
+      ffmpeg
       fzf
       graphene-hardened-malloc
       glibcLocales
@@ -93,6 +94,7 @@
       logrotate
       lm_sensors
       mako
+      mtpfs
       musl
       oh-my-zsh
       redshift
@@ -134,18 +136,19 @@
       openal
       pavucontrol
       pipewire
+      signal-desktop
       webcamoid
 
       # Wayland and Compositing
       eww
       foot
+      rofi
       swaybg
       vesktop
       waybar
       wayland
       wayland-utils
       waypaper
-      wofi
       xwayland
 
       # Text Editors and IDEs
@@ -189,6 +192,7 @@
       ubuntu_font_family
   ] ++ (with pkgs.kdePackages; [
     polkit-kde-agent-1
+    kdenlive
   ]) ++ (with pkgs.xfce; [
     thunar
   ]);

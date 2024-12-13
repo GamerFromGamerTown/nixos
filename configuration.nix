@@ -35,6 +35,7 @@ in
     ./modules/secrets/GaymerPasswd.nix
     ./modules/secrets/vpnconfig.nix
     ./modules/aa-profiles/aa-profiles.nix
+#    ./modules/musl.nix
     # ./modules/systemd_hardening.nix
     ./modules/system_users.nix
     "${home-manager}/nixos" # Correct reference to home-manager fetched tarball

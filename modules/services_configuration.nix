@@ -23,6 +23,10 @@
     };
     desktopManager.plasma6.enable = true;
 
+    preload = {
+     enable = true;
+    };
+
     # Enable printing with CUPS
     printing = {
       enable = true;

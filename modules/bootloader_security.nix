@@ -31,6 +31,8 @@
       "kvm"
       "kvm-amd"
       "ntfs"
+      "prng"
+      "random"
       "usbhid"
       "vfat"
       "xhci_pci"
@@ -112,7 +114,8 @@
   # Sysctl Configuration
   boot.kernel.sysctl = {
     # Network Settings
-    "net.ipv4.icmp_ratelimit" = "500"; # Control ICMP rate limit
+    "net.core.bpf_jit_harden"  = "2";
+    "net.ipv4.icmp_ratelimit" = "500"; 
     "net.ipv4.tcp_timestamps" = "0";
     "net.core.netdev_max_backlog" = "250000";
     "net.ipv4.tcp_congestion_control" = "bbr";
